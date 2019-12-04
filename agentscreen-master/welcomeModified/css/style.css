@@ -1,0 +1,51 @@
+button {
+  display: inline-block;
+  border-radius: 3px;
+  border: none;
+  font-size: 0.9rem;
+  padding: 0.6rem 1em;
+  color: white;
+  margin: 0 0.25rem;
+  text-align: center;
+  background: #BABABA;
+  border-bottom: 1px solid #999;
+  position: center;
+  padding: 5px;
+  left: 30px;
+}
+
+button:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+div.jumbotron{
+	 padding: 50px;
+     border: 3px solid black;
+	 color: #f7f7f9;
+     background-color: #090909bf;
+}
+}
+div.col-md-4{
+     border: 3px solid black;
+	 padding: 5px;
+	 height:350px;
+}
+#CustInfo{	
+     border: 2px solid black;
+	 margin: 0 0.25rem;
+	 padding: 5px;
+	 height:365px;
+	 background-color: #4b4033d6;
+     color: #f7f7f9;
+}
+#close{
+  margin-top: 50px;
+  margin-left: 21px;
+  background: #BABABb;
+  background-color: #c58c8b;
+}
+span.badge {
+	margin-bottom: 20px;
+	background-color: green;
+}

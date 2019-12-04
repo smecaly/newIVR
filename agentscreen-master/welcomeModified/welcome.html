@@ -1,0 +1,241 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  window.onload = function() {
+  var messagesList = document.getElementById('CustomerDetails');
+  var closeBtn = document.getElementById('close');
+  var SentimentMessage = document.getElementById('sentiment');
+  //document.getElementById("Greeting").innerHTML = 'Welcome ' + sessionStorage.getItem("AgentUserName");
+  // Create a new WebSocket.
+  var socket = new WebSocket("wss://h01v0p99ii.execute-api.us-east-1.amazonaws.com/test/");
+  
+  // Handle any errors that occur.
+  socket.onerror = function(error) {
+    console.log('WebSocket Error: ' + error);
+  };
+
+
+  // Show a connected message when the WebSocket is opened.
+  socket.onopen = function(event) {
+  alert('connected to websocket');
+      var agentUserName = "HiteshKaurav";
+	  //sessionStorage.getItem("AgentUserName");
+	  var message = '{"action" : "OnUpdate" , "AgentID" :' + '\"' + agentUserName + '\"}';
+	  socket.send(message)
+  };
+
+
+  // Handle messages sent by the server.
+  socket.onmessage = function(event) {
+    var message = event.data;
+	if (message.includes("Sentiment")) 
+	{
+     SentimentMessage.innerHTML = '<li class="received"><span><b>Customer Sentiment:</b></span>' +
+                               JSON.parse(message).messages[0].Sentiment + '</li>';
+    } 
+    else {
+    messagesList.innerHTML = '<li class="received">' + 
+                                JSON.parse(message).messages[0].CustomerInformation  +'\n Address: New York USA</li>';
+    }
+  };
+
+
+  // Show a disconnected message when the WebSocket is closed.
+  socket.onclose = function(event) {
+   alert('disconnected from websocket');
+  };
+
+  // Close the WebSocket connection when the close button is clicked.
+  closeBtn.onclick = function(e) {
+    e.preventDefault();
+
+    // Close the WebSocket.
+    socket.close();
+
+    return false;
+  };
+
+};
+	
+</script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 25px;
+  border: none;
+  cursor: pointer;
+  width: 110px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+.jumbotron {
+background-color:rgba(255,255,255,.15);
+Height:2px
+}
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+}
+.container {
+  padding: 16px;
+  align:left;
+
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+div.col-md-4{
+	 padding: 5px;
+	 height:265px;
+	 background-color: #64a7e0;
+}
+#CustInfo{	
+	 margin: 0 10.25rem;
+	 padding: 5px;
+	 height:275px;
+	 background-color: #64a7e0;
+     color: #292b2c;
+}
+/* Modal Content/Box */
+.modal-content {
+  background-image:"https://www.finextra.com/finextra-images/top_pics/xl/risks-and-benefits-of-open-banking.jpg" ;
+  background-color: #fefefe;
+  margin: 10% 10% 15% 10%; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: left-side;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+span.badge {
+	margin-bottom: 20px;
+	background-color: green;
+}
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+}
+</style>
+</head>
+ <!--<body background ="https://securecdn.pymnts.com/wp-content/uploads/2019/08/bottomline-open-banking-api.jpg"> -->
+<!--<body background="https://cyara.com/wp-content/uploads/products/header-platform-call-routing-agent-desktop.png">-->
+
+<body background="https://miro.medium.com/max/3840/1*4dpDj2l8NJRHCQdx38dxIQ.png">
+ <div class="jumbotron">
+				<h2 id ="Greeting">
+					<center>Welcome Hitesh Kaurav</center>
+				</h2>
+				<p>				
+				</p>
+			</div>
+  
+			<div class="row" id="CustInfo">
+				<div class="col-md-4">
+					 <span class="badge badge-default">Customer Details</span>	
+                     <p id="CustomerDetails"></p>				 
+				</div>
+				<div class="col-md-4">
+					 <span class="badge badge-default">Customer's Sentiment</span>
+					<p id="sentiment">	
+					</p>
+				</div>
+				<div class="col-md-4">
+					 <span class="badge badge-default">Personalize</span>
+					<p id="Recommendation" >	
+					This Functionality is coming soon.
+					</p>
+				</div>
+			</div>
+</div>
+		<button type="button" id="close">Close</button>
+</div>
+<script>
+</script>
+
+</body>
+</html>
+
