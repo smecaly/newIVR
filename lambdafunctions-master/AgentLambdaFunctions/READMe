@@ -1,0 +1,6 @@
+•	ChayRommConnect function is a Lambda to store the connectionId of the Agent into the table(Chat) which will be invoked when connecting with the websocket(ChatRoomConnectFunction).
+•	UpdateAgentID is a lambda to update the Agent Username into the table(Chat) against the connectionID which will be invoked when the websocket connection is opened(UpdateAgentID).
+•	ChatRoomDisconnectFunction is a lambda to delete the connectionID from the table(Chat) when connection websocket gets disconnected(ChatRoomDisconnectFunction).
+•	ChatRoomOnMessage lambda to push customer’s details which will be invoked from the contact flow when the customer call gets transferred to the Agent (Include the Invoke AWS Lambda block and mention the name of the lambda before transfer to the queue block) (ChatRoomOnMessage).
+•	SentimentAnalysis is a lambda to push Customer’s sentiment onto the Agent Screen(SentimentAnalysis).
+•	Personalize is a lambda to Include the name of the caller in the prompt(Personalize)
